@@ -347,7 +347,7 @@ def _registration_diff_pack(diff: int, packed_diff: multiprocessing.Array):
 
 def _hash_block_with_hotkey(block_bytes: bytes, hotkey_bytes: bytes) -> bytes:
     """Hashes the block with the hotkey using Keccak-256 to get 32 bytes"""
-    kec = keccak.new(digest_bits=256)
+    kec = keccak.new(digest_bits=512)
     kec = kec.update(bytearray(block_bytes + hotkey_bytes))
     block_and_hotkey_hash_bytes = kec.digest()
     return block_and_hotkey_hash_bytes
