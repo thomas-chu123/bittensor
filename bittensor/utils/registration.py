@@ -35,7 +35,7 @@ def _hex_bytes_to_u8_list(hex_bytes: bytes):
 def _create_seal_hash(block_and_hotkey_hash_bytes: bytes, nonce: int) -> bytes:
     nonce_bytes = binascii.hexlify(nonce.to_bytes(8, "little"))
     pre_seal = nonce_bytes + binascii.hexlify(block_and_hotkey_hash_bytes)[:64]
-    seal_sha512 = hashlib.sha512(bytearray(_hex_bytes_to_u8_list(pre_seal))).digest()
+    seal_sha512 = hashlib.sha3_512(bytearray(_hex_bytes_to_u8_list(pre_seal))).digest()
     kec = keccak.new(digest_bits=512)
     seal = kec.update(seal_sha512).digest()
     return seal
